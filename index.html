@@ -263,7 +263,7 @@ updateAndSendData(dailyData)
   const userAgent = navigator.userAgent.toLowerCase();
 
   // Detect device type
-  /*let deviceType = '';
+  let deviceType = '';
   if (/mobile/.test(userAgent) && !/tablet/.test(userAgent)) {
     deviceType = 'mobile';
   } else if (/tablet/.test(userAgent)) {
@@ -335,9 +335,9 @@ updateAndSendData(dailyData)
   } else {
     console.warn('Incomplete environment detection, skipping impression.');
   }
-}*/
+}
 
-      function detectEnvironment() {
+      /*function detectEnvironment() {
   const userAgent = navigator.userAgent.toLowerCase();
   console.log('User-Agent Detected:', userAgent); // Log User-Agent for debugging
 
@@ -422,8 +422,7 @@ updateAndSendData(dailyData)
   }
 }
 
-// Call the function
-detectEnvironment();
+*/
 
 
 detectEnvironment()
