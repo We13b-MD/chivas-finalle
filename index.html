@@ -263,7 +263,7 @@ updateAndSendData(dailyData)
   const userAgent = navigator.userAgent.toLowerCase();
 
   // Detect device type
-  let deviceType = '';
+  /*let deviceType = '';
   if (/mobile/.test(userAgent) && !/tablet/.test(userAgent)) {
     deviceType = 'mobile';
   } else if (/tablet/.test(userAgent)) {
@@ -335,7 +335,96 @@ updateAndSendData(dailyData)
   } else {
     console.warn('Incomplete environment detection, skipping impression.');
   }
+}*/
+
+      function detectEnvironment() {
+  const userAgent = navigator.userAgent.toLowerCase();
+  console.log('User-Agent Detected:', userAgent); // Log User-Agent for debugging
+
+  // Detect device type
+  let deviceType = '';
+  if (/mobile/.test(userAgent) && !/tablet/.test(userAgent)) {
+    deviceType = 'mobile';
+  } else if (/tablet/.test(userAgent) || (/ipad/.test(userAgent) && !/mobile/.test(userAgent))) {
+    deviceType = 'tablet';
+  } else {
+    deviceType = 'desktop';
+  }
+
+  console.log('Device Type Detected:', deviceType); // Log detected device type
+
+  // Detect browser type
+  let browserType = '';
+  if (/chrome/.test(userAgent) && !/edge/.test(userAgent) && !/opr/.test(userAgent)) {
+    browserType = 'chrome';
+  } else if (/safari/.test(userAgent) && !/chrome/.test(userAgent)) {
+    browserType = 'safari';
+  } else if (/edge/.test(userAgent)) {
+    browserType = 'edge';
+  }
+
+  console.log('Browser Type Detected:', browserType); // Log detected browser type
+
+  // Detect OS type
+  let osType = '';
+  if (/windows/.test(userAgent)) {
+    osType = 'windows';
+  } else if (/macintosh|mac os x/.test(userAgent)) {
+    osType = 'macOS';
+  } else if (/linux/.test(userAgent)) {
+    osType = 'linux';
+  } else if (/android/.test(userAgent)) {
+    osType = 'android';
+  } else if (/iphone|ipad|ipod/.test(userAgent)) {
+    osType = 'ios';
+  }
+
+  console.log('OS Type Detected:', osType); // Log detected OS type
+
+  // Increment impressions and synchronize counts
+  if (deviceType && browserType && osType) {
+    dailyData.imp++;
+
+    // Increment device counts
+    if (deviceType === 'mobile') {
+      dailyData.mobile++;
+    } else if (deviceType === 'tablet') {
+      dailyData.tablet++;
+    } else if (deviceType === 'desktop') {
+      dailyData.desktop++;
+    }
+
+    // Increment browser counts
+    if (browserType === 'chrome') {
+      dailyData.chrome++;
+    } else if (browserType === 'safari') {
+      dailyData.safari++;
+    } else if (browserType === 'edge') {
+      dailyData.edge++;
+    }
+
+    // Increment OS counts
+    if (osType === 'windows') {
+      dailyData.windows++;
+    } else if (osType === 'macOS') {
+      dailyData.macOS++;
+    } else if (osType === 'linux') {
+      dailyData.linux++;
+    } else if (osType === 'android') {
+      dailyData.android++;
+    } else if (osType === 'ios') {
+      dailyData.ios++;
+    }
+
+    updateAndSendData(dailyData); // Update and send data
+  } else {
+    console.warn('Incomplete environment detection, skipping impression.');
+  }
 }
+
+// Call the function
+detectEnvironment();
+
 
 detectEnvironment()
 
